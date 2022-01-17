@@ -6,3 +6,6 @@ class HomePage:
         self.driver = driver
 
     homepageContainer = (By.CSS_SELECTOR, ".hl-full-bleed-banner__image-container")
+
+    def clickSignIn(self):
+        pass

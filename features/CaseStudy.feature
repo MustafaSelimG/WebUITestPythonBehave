@@ -2,7 +2,8 @@ Feature: case study
 
   Background: verify login
     Given navigate to website
-    And open sign in page
+    When open sign in page
+    And enter email "" and password ""
     Then verify sign in
 
   Scenario: verify product in the basket

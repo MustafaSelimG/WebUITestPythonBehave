@@ -7,8 +7,9 @@ from pages.HeaderBanner import HeaderBanner
 from pages.SearchResultPage import SearchResultPage
 from pages.ProductPage import ProductPage
 from pages.BasketPage import BasketPage
+from pages.SignInPage import SignInPage
 
-class Steps(HomePage, HeaderBanner, SearchResultPage, ProductPage, BasketPage):
+class Steps(HomePage, HeaderBanner, SearchResultPage, ProductPage, BasketPage, SignInPage):
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -24,7 +25,7 @@ class Steps(HomePage, HeaderBanner, SearchResultPage, ProductPage, BasketPage):
 
     @step("open sign in page")
     def open_sign_in_page(self):
-        HomePage(self.driver)
+        HomePage(self.driver).clickSignIn()
 
 
     @then("verify sign in")
