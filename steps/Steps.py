@@ -12,6 +12,7 @@ from pages.SignInPage import SignInPage
 class Steps(HomePage, HeaderBanner, SearchResultPage, ProductPage, BasketPage, SignInPage):
 
     def __init__(self, driver):
+        self.driver = driver
         super().__init__(driver)
 
 
@@ -20,17 +21,23 @@ class Steps(HomePage, HeaderBanner, SearchResultPage, ProductPage, BasketPage, S
         self.driver = webdriver.Chrome(ChromeDriverManager().install())
         self.driver.maximize_window()
         self.driver.implicitly_wait(30)
-        self.driver.get("https://www.ebay.com/")
+        self.driver.get("https://www.ciceksepeti.com/")
 
+    @step("close the address selection")
+    def close_the_address(self):
+        HeaderBanner(self.driver).closeTheAddressSection()
 
-    @step("open sign in page")
+    @when("open sign in page")
     def open_sign_in_page(self):
-        HomePage(self.driver).clickSignIn()
+        HeaderBanner(self.driver).clickSignIn()
 
+    @step('enter email "{email}" and password "{password}"')
+    def enter_email_and_password(self,email,password):
+        SignInPage(self.driver).SignIn(email,password)
 
-    @then("verify sign in")
-    def verify_sign_in(self):
-
+    @then('verify homepage is open')
+    def verify_homepage_is_open(self):
+        HomePage(self.driver).verifyHomepage()
 
 
     @when("open shop by category")
@@ -100,3 +107,4 @@ class Steps(HomePage, HeaderBanner, SearchResultPage, ProductPage, BasketPage, S
     @then("product should be seen in the basket")
     def product_should_be_seen_in_the_basket(self):
         raise NotImplementedError(u'STEP: Then product should be seen in the basket')
+
