@@ -9,12 +9,12 @@ from pages.ProductPage import ProductPage
 from pages.BasketPage import BasketPage
 from pages.SignInPage import SignInPage
 
+
 class Steps(HomePage, HeaderBanner, SearchResultPage, ProductPage, BasketPage, SignInPage):
 
     def __init__(self, driver):
         self.driver = driver
         super().__init__(driver)
-
 
     @given('navigate to website')
     def navigateToWebsite(self):
@@ -32,79 +32,29 @@ class Steps(HomePage, HeaderBanner, SearchResultPage, ProductPage, BasketPage, S
         HeaderBanner(self.driver).clickSignIn()
 
     @step('enter email "{email}" and password "{password}"')
-    def enter_email_and_password(self,email,password):
-        SignInPage(self.driver).SignIn(email,password)
+    def enter_email_and_password(self, email, password):
+        SignInPage(self.driver).SignIn(email, password)
 
     @then('verify homepage is open')
     def verify_homepage_is_open(self):
         HomePage(self.driver).verifyHomepage()
 
+    @when('search for "{searchKey}"')
+    def search_for(self, searchKey):
+        HeaderBanner(self.driver).searchFor(searchKey)
 
-    @when("open shop by category")
-    def open_shop_by_category(self):
-        """
-        :type context: behave.runner.Context
-        """
-        raise NotImplementedError(u'STEP: When open shop by category')
+    @step('filter "{color}" color ones')
+    def filter_color_ones(self, color):
+        SearchResultPage(self.driver).filterColor(color)
 
+    @step("select the first product")
+    def select_the_first_product(self):
+        SearchResultPage(self.driver).selectTheProduct()
 
-    @step("select guitar")
-    def select_guitar(self):
-        """
-        :type context: behave.runner.Context
-        """
-        raise NotImplementedError(u'STEP: And select guitar')
+    @step("add product to basket")
+    def add_product_to_basket(self):
+        ProductPage(self.driver).addBasket()
 
-
-    @step("randomly select a submenu")
-    def randomly_select_a_submenu(self):
-        """
-        :type context: behave.runner.Context
-        """
-        raise NotImplementedError(u'STEP: And randomly select a submenu')
-
-
-    @step("randomly select a product")
-    def randomly_select_a_product(self):
-        """
-        :type context: behave.runner.Context
-        """
-        raise NotImplementedError(u'STEP: And randomly select a product')
-
-
-    @step("open the product in new tab")
-    def open_the_product_in_new_tab(self):
-        """
-        :type context: behave.runner.Context
-        """
-        raise NotImplementedError(u'STEP: And open the product in new tab')
-
-
-    @step("add product the cart")
-    def add_product_the_cart(self):
-        """
-        :type context: behave.runner.Context
-        """
-        raise NotImplementedError(u'STEP: And add product the cart')
-
-
-    @step("close the tab")
-    def close_the_tab(self):
-        """
-        :type context: behave.runner.Context
-        """
-        raise NotImplementedError(u'STEP: And close the tab')
-
-
-    @step("open the basket")
-    def open_the_basket(self):
-        """
-        :type context: behave.runner.Context
-        """
-        raise NotImplementedError(u'STEP: And open the basket')
-
-
-    @then("product should be seen in the basket")
-    def product_should_be_seen_in_the_basket(self):
-        raise NotImplementedError(u'STEP: Then product should be seen in the basket')
-
+    @step("delete product from the basket")
+    def delete_product_from_the_basket(self):
+        BasketPage(self.driver).deleteTheProduct()

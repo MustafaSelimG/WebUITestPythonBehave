@@ -7,7 +7,5 @@ class HomePage:
         self.driver = driver
 
     def verifyHomepage(self):
-        wait = ui.WebDriverWait(self.driver, 20)
+        wait = ui.WebDriverWait(self.driver, 10)
         wait.until(EC.url_to_be("https://www.ciceksepeti.com/"))
-        # current_url = self.driver.current_url
-        # assert(current_url,"https://www.ciceksepeti.com")
